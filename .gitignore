@@ -1,0 +1,22 @@
+# Go build and test outputs
+/tomatone
+/tomatone.exe
+/tomatone.exe~
+/.gocache/
+*.test
+*.out
+coverage.*
+
+# Local configuration
+/config.json
+
+# Temporary and editor files
+*~
+*.tmp
+.idea/
+.vscode/
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini

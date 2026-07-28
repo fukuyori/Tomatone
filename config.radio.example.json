@@ -1,0 +1,23 @@
+{
+  "timer": {
+    "focus": "25m",
+    "short_break": "5m",
+    "long_break": "15m",
+    "focus_sessions_before_long_break": 4,
+    "auto_start": true
+  },
+  "chime": {
+    "volume": 80
+  },
+  "ambience": {
+    "urls": [
+      "https://somafm.com/groovesalad.pls"
+    ],
+    "focus_urls": [],
+    "break_urls": [],
+    "time_rules": [],
+    "shuffle": true,
+    "volume": 45,
+    "player_command": "mpv"
+  }
+}

@@ -1,0 +1,40 @@
+{
+  "timer": {
+    "focus": "25m",
+    "short_break": "5m",
+    "long_break": "15m",
+    "focus_sessions_before_long_break": 4,
+    "auto_start": true
+  },
+  "chime": {
+    "volume": 80
+  },
+  "ambience": {
+    "urls": [
+      "https://www.youtube.com/watch?v=DEFAULT_VIDEO_ID",
+      "https://somafm.com/groovesalad.pls"
+    ],
+    "focus_urls": [
+      "https://www.youtube.com/watch?v=FOCUS_BGM_ID"
+    ],
+    "break_urls": [
+      "https://www.youtube.com/watch?v=BREAK_BGM_ID"
+    ],
+    "time_rules": [
+      {
+        "name": "夜間モード",
+        "start": "21:00",
+        "end": "06:00",
+        "focus_urls": [
+          "https://www.youtube.com/watch?v=NIGHT_FOCUS_ID"
+        ],
+        "break_urls": [
+          "https://www.youtube.com/watch?v=NIGHT_BREAK_ID"
+        ]
+      }
+    ],
+    "shuffle": true,
+    "volume": 45,
+    "player_command": "mpv"
+  }
+}
