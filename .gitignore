@@ -2,6 +2,7 @@
 /tomatone
 /tomatone.exe
 /tomatone.exe~
+/Tomatone-*-windows-*.zip
 /.gocache/
 /.gomodcache/
 *.test

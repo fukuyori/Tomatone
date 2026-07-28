@@ -9,6 +9,10 @@ All notable changes to Tomatone are documented in this file.
 - Clear temporary CUI operation messages after three seconds instead of leaving them on screen indefinitely.
 - Show playback state on the operation-message line after a temporary message disappears.
 
+### Changed
+
+- Organize the Go command under `cmd/tomatone`, detailed documentation under `docs`, and configuration samples under `examples`.
+
 ## [0.1.0] - 2026-07-28
 
 ### Added

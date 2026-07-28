@@ -19,11 +19,11 @@ Tomatone は、YouTubeやネットラジオのアンビエントサウンドを�
 ## ビルドと起動
 
 ```powershell
-go build -buildvcs=false -o tomatone.exe .
+go build -buildvcs=false -o tomatone.exe ./cmd/tomatone
 .\tomatone.exe
 ```
 
-Gitリポジトリ内では通常の `go build -o tomatone.exe .` でもビルドできます。まだGit管理されていないディレクトリでVCS情報の検出エラーが出る場合だけ `-buildvcs=false` を付けてください。
+Gitリポジトリ内では通常の `go build -o tomatone.exe ./cmd/tomatone` でもビルドできます。まだGit管理されていないディレクトリでVCS情報の検出エラーが出る場合だけ `-buildvcs=false` を付けてください。
 
 初回起動時に設定ファイルが作成されます。場所は次のコマンドで確認できます。
 
@@ -41,7 +41,7 @@ Gitリポジトリ内では通常の `go build -o tomatone.exe .` でもビル�
 
 ## 設定
 
-作成された `config.json` をエディターで開き、時間とアンビエンスURLを編集します。リポジトリ内の [`config.example.json`](config.example.json) と、ネットラジオ専用の [`config.radio.example.json`](config.radio.example.json) も見本として利用できます。
+作成された `config.json` をエディターで開き、時間とアンビエンスURLを編集します。リポジトリ内の [`config.example.json`](../examples/config.example.json) と、ネットラジオ専用の [`config.radio.example.json`](../examples/config.radio.example.json) も見本として利用できます。
 
 ```json
 {
