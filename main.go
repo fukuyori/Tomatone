@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const version = "0.1.0"
+const version = "0.1.1"
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
@@ -243,7 +243,7 @@ func runTimer(configPath string, cfg RuntimeConfig) error {
 				ui.SetMessage("現在のフェーズをリセットしました")
 			case "n", "next":
 				player.Next()
-				ui.SetMessage("次のアンビエンスへ切り替えています")
+				ui.SetMessage("次のアンビエンスに切り替えています")
 			case "+", "=":
 				if _, ok := player.AdjustVolume(true); !ok {
 					ui.SetMessage("再生開始後に音量を変更できます")

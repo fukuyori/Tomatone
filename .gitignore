@@ -3,6 +3,7 @@
 /tomatone.exe
 /tomatone.exe~
 /.gocache/
+/.gomodcache/
 *.test
 *.out
 coverage.*

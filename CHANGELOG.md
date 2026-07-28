@@ -2,6 +2,13 @@
 
 All notable changes to Tomatone are documented in this file.
 
+## [0.1.1] - 2026-07-28
+
+### Fixed
+
+- Clear temporary CUI operation messages after three seconds instead of leaving them on screen indefinitely.
+- Show playback state on the operation-message line after a temporary message disappears.
+
 ## [0.1.0] - 2026-07-28
 
 ### Added

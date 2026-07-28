@@ -18,12 +18,15 @@ const (
 	ansiAudio  = "\x1b[38;5;179m" // Warm Sand Gold
 	ansiSubtle = "\x1b[38;5;242m" // Dark Gray for Rules
 	ansiError  = "\x1b[38;5;203m"
+
+	uiMessageDuration = 3 * time.Second
 )
 
 type UI struct {
 	out        io.Writer
 	configPath string
 	message    string
+	messageEnd time.Time
 	immediate  bool
 }
 
@@ -41,6 +44,19 @@ func (u *UI) Close() {
 
 func (u *UI) SetMessage(message string) {
 	u.message = message
+	if message == "" {
+		u.messageEnd = time.Time{}
+		return
+	}
+	u.messageEnd = time.Now().Add(uiMessageDuration)
+}
+
+func (u *UI) currentMessage(now time.Time) string {
+	if u.message != "" && !u.messageEnd.IsZero() && !now.Before(u.messageEnd) {
+		u.message = ""
+		u.messageEnd = time.Time{}
+	}
+	return u.message
 }
 
 func (u *UI) Render(timer *Pomodoro, player PlayerSnapshot) {
@@ -86,8 +102,7 @@ func (u *UI) Render(timer *Pomodoro, player PlayerSnapshot) {
 		title = "アンビエンス URL が未設定です"
 	}
 	titleLeft := "  🎵 " + ansiBold + truncate(title, 34) + ansiReset
-	midRight := playerStateLabel(player.State) + "  "
-	frame.WriteString(alignRow(titleLeft, midRight, width) + "\n")
+	frame.WriteString(titleLeft + "\n")
 
 	// 6. Player Details / Stats
 	if player.Total > 0 {
@@ -109,10 +124,11 @@ func (u *UI) Render(timer *Pomodoro, player PlayerSnapshot) {
 		frame.WriteString(errStr + "\n")
 	}
 
-	if u.message != "" {
-		msgStr := "     " + accent + truncate(u.message, 44) + ansiReset
-		frame.WriteString(msgStr + "\n")
+	statusLine := playerStateLabel(player.State)
+	if message := u.currentMessage(time.Now()); message != "" {
+		statusLine = accent + truncate(message, 44) + ansiReset
 	}
+	frame.WriteString("     " + statusLine + "\n")
 
 	// Bottom Divider
 	frame.WriteString("  " + ansiSubtle + strings.Repeat("─", width-4) + ansiReset + "\n")
