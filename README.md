@@ -1,6 +1,6 @@
 # Tomatone
 
-Version: **0.1.1**
+Version: **0.1.2**
 
 A CUI Pomodoro timer with YouTube and internet-radio ambience.
 
@@ -8,6 +8,12 @@ A CUI Pomodoro timer with YouTube and internet-radio ambience.
 - [日本語ドキュメント](docs/README.ja.md)
 - [Changelog](docs/CHANGELOG.md)
 - [Configuration examples](examples/)
+
+Manage ambience sources in the terminal:
+
+```powershell
+.\tomatone.exe sources
+```
 
 ## Build
 

@@ -17,7 +17,7 @@ func TestMPVIPCVolumeIntegration(t *testing.T) {
 	if os.Getenv("TOMATONE_TEST_MPV") != "1" {
 		t.Skip("set TOMATONE_TEST_MPV=1 to run the mpv integration test")
 	}
-	mpvPath, err := exec.LookPath("mpv")
+	mpvPath, err := resolvePlayerCommand("mpv")
 	if err != nil {
 		mpvPath = filepath.Join(os.Getenv("USERPROFILE"), "scoop", "apps", "mpv", "current", "mpv.exe")
 		if _, statErr := os.Stat(mpvPath); statErr != nil {

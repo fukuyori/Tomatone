@@ -2,7 +2,7 @@
 
 English | [日本語](README.ja.md)
 
-Version: **0.1.1**
+Version: **0.1.2**
 
 Repository: [github.com/fukuyori/Tomatone](https://github.com/fukuyori/Tomatone)
 
@@ -134,6 +134,33 @@ The NTS Slow Focus webpage URL can be registered directly. Tomatone automaticall
   "https://www.nts.live/infinite-mixtapes/slow-focus"
 ]
 ```
+
+## Source manager
+
+Open the CUI source manager to register, edit, delete, or preview ambience sources without editing JSON manually:
+
+```powershell
+.\tomatone.exe sources
+```
+
+Use `--config` to manage a configuration file at a specific path:
+
+```powershell
+.\tomatone.exe --config .\config.json sources
+```
+
+| Command | Action |
+|---|---|
+| `Up` / `Down` | Move the selection through the source list. |
+| `a` | Add a URL to the default, Focus, Break, or time-rule list. |
+| `e` | Edit the selected source URL. |
+| `m` | Move the selected source to another usage group. |
+| `d` | Delete the selected source; press `y` or `n` directly at the confirmation. |
+| `Enter` / `p` | Preview the selected source at the configured volume until `Space` is pressed. |
+| `q` | Close the source manager. |
+
+Every add, edit, move, and delete operation validates the complete configuration and saves it immediately. Existing `time_rules` source lists also appear as selectable destinations.
+Arrow-key selection and preview stopping require a terminal with immediate key input. Redirected standard input falls back to the line-oriented commands that accept source IDs.
 
 ## Recommended radio channels
 

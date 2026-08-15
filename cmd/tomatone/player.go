@@ -136,7 +136,8 @@ func (p *AmbientPlayer) Run(ctx context.Context) {
 	if !p.cfg.HasAnyURL() {
 		return
 	}
-	if _, err := exec.LookPath(p.cfg.PlayerCommand); err != nil {
+	playerPath, err := resolvePlayerCommand(p.cfg.PlayerCommand)
+	if err != nil {
 		p.setError(fmt.Sprintf("%s が見つかりません。mpv をインストールするか player_command を変更してください", p.cfg.PlayerCommand))
 		return
 	}
@@ -175,7 +176,7 @@ func (p *AmbientPlayer) Run(ctx context.Context) {
 		}
 
 		index := choosePlaybackIndex(urls, p.cfg.Shuffle, orderPos, lastURL)
-		naturalEnd, keepGoing := p.playOne(ctx, urls, index)
+		naturalEnd, keepGoing := p.playOne(ctx, playerPath, urls, index)
 		if !keepGoing {
 			return
 		}
@@ -219,7 +220,7 @@ func choosePlaybackIndex(urls []string, shuffle bool, orderPos int, lastURL stri
 	return candidates[rand.IntN(len(candidates))]
 }
 
-func (p *AmbientPlayer) playOne(ctx context.Context, urls []string, index int) (naturalEnd, keepGoing bool) {
+func (p *AmbientPlayer) playOne(ctx context.Context, playerPath string, urls []string, index int) (naturalEnd, keepGoing bool) {
 	trackCtx, cancel := context.WithCancel(ctx)
 	defer cancel()
 
@@ -245,7 +246,7 @@ func (p *AmbientPlayer) playOne(ctx context.Context, urls []string, index int) (
 	ipcPath := newMPVIPCPath()
 	defer cleanupMPVIPC(ipcPath)
 	args = append(args, "--input-ipc-server="+ipcPath, playbackURL)
-	cmd := exec.CommandContext(trackCtx, p.cfg.PlayerCommand, args...)
+	cmd := exec.CommandContext(trackCtx, playerPath, args...)
 	stdout, err := cmd.StdoutPipe()
 	if err != nil {
 		p.setErrorFor(generation, err.Error())
@@ -329,6 +330,7 @@ func buildPlaybackArgs(url string, volume int, startPos time.Duration) []string 
 		"--no-video",
 		"--force-window=no",
 		"--idle=no",
+		"--input-terminal=no",
 		"--volume=" + strconv.Itoa(volume),
 		"--term-playing-msg=TOMATONE_META\t${media-title}",
 		"--term-status-msg=TOMATONE_STATUS\t${media-title}\t${time-pos}\t${duration}\t${pause}\t${volume}\t${metadata/by-key/icy-title}",

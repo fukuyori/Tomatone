@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-const version = "0.1.1"
+const version = "0.1.2"
 
 func main() {
 	if err := run(os.Args[1:]); err != nil {
@@ -75,6 +75,8 @@ func run(args []string) error {
 			return runConfigCommand(*configPath, remainingArgs[1:])
 		case "chime":
 			return runChimeCommand(*configPath, remainingArgs[1:])
+		case "sources":
+			return runSourceManagerCommand(*configPath, remainingArgs[1:])
 		case "help":
 			printUsage(flags)
 			return nil
@@ -294,6 +296,7 @@ func printUsage(flags *flag.FlagSet) {
   tomatone [--config PATH] config show
   tomatone [--config PATH] config path
   tomatone [--config PATH] config validate
+  tomatone [--config PATH] sources
   tomatone [--config PATH] --check-config
   tomatone [--config PATH] --check-url URL [--check-timeout 30s]
   tomatone [--config PATH] --check-urls [--check-timeout 30s]

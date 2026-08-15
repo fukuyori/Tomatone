@@ -89,7 +89,8 @@ func checkURLTargets(playerCommand string, targets []URLCheckTarget, timeout tim
 		fmt.Println("URL: 登録なし")
 		return nil
 	}
-	if _, err := exec.LookPath(playerCommand); err != nil {
+	playerPath, err := resolvePlayerCommand(playerCommand)
+	if err != nil {
 		return fmt.Errorf("%s が見つかりません: %w", playerCommand, err)
 	}
 
@@ -97,7 +98,7 @@ func checkURLTargets(playerCommand string, targets []URLCheckTarget, timeout tim
 	failures := 0
 	for i, target := range targets {
 		started := time.Now()
-		err := probeMediaURL(playerCommand, target.URL, timeout)
+		err := probeMediaURL(playerPath, target.URL, timeout)
 		elapsed := time.Since(started).Round(100 * time.Millisecond)
 		kind := "STREAM"
 		if isYouTubeURL(target.URL) {
@@ -135,6 +136,7 @@ func probeMediaURL(playerCommand, rawURL string, timeout time.Duration) error {
 		"--no-config",
 		"--no-video",
 		"--force-window=no",
+		"--input-terminal=no",
 		"--ao=null",
 		"--volume=0",
 		"--length=1",

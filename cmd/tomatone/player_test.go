@@ -161,6 +161,9 @@ func TestLiveStreamPositionIsNotSaved(t *testing.T) {
 
 func TestPlaybackArgsSelectResolverBySource(t *testing.T) {
 	youtubeArgs := buildPlaybackArgs("https://youtu.be/test", 45, 0)
+	if !containsArgument(youtubeArgs, "--input-terminal=no") {
+		t.Fatalf("YouTube args = %#v, want --input-terminal=no", youtubeArgs)
+	}
 	if !containsArgument(youtubeArgs, "--ytdl=yes") {
 		t.Fatalf("YouTube args = %#v, want --ytdl=yes", youtubeArgs)
 	}

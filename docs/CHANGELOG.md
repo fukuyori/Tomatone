@@ -2,6 +2,18 @@
 
 All notable changes to Tomatone are documented in this file.
 
+## [0.1.2] - 2026-08-15
+
+### Added
+
+- Add an arrow-key CUI source manager for registering, editing, moving between usage groups, deleting, and previewing ambience URLs until `Space` is pressed.
+
+### Fixed
+
+- Disable mpv terminal input during previews so Tomatone exclusively receives the preview stop key.
+- Prefer the real `mpv.exe` over Scoop's `mpv.com` launcher so stopping playback terminates the managed player process.
+- Accept delete confirmation with immediate `y`/`n` key input in the source manager.
+
 ## [0.1.1] - 2026-07-28
 
 ### Fixed
