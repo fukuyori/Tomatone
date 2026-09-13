@@ -2,7 +2,7 @@
 
 [English](README.md) | 日本語
 
-バージョン: **0.1.2**
+バージョン: **0.2.0**
 
 リポジトリ: [github.com/fukuyori/Tomatone](https://github.com/fukuyori/Tomatone)
 

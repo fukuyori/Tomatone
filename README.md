@@ -1,6 +1,6 @@
 # Tomatone
 
-Version: **0.1.2**
+Version: **0.2.0**
 
 A CUI Pomodoro timer with YouTube and internet-radio ambience.
 
