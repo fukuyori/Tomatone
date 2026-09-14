@@ -2,6 +2,16 @@
 
 All notable changes to Tomatone are documented in this file.
 
+## [0.2.1] - 2026-09-15
+
+### Fixed
+
+- Enable immediate command-key input without Enter on macOS and Linux terminals.
+
+### Changed
+
+- Update the project version to 0.2.1.
+
 ## [0.2.0] - 2026-09-13
 
 ### Changed

@@ -2,7 +2,7 @@
 
 English | [日本語](README.ja.md)
 
-Version: **0.2.0**
+Version: **0.2.1**
 
 Repository: [github.com/fukuyori/Tomatone](https://github.com/fukuyori/Tomatone)
 
@@ -16,14 +16,65 @@ Tomatone is a CUI Pomodoro timer that plays ambient audio from YouTube and inter
 
 Make sure `mpv` is available on `PATH`. YouTube playback additionally requires `yt-dlp`. Tomatone plays audio only and does not open a video window.
 
-## Build and run
+## Install playback tools
+
+### Windows (PowerShell with Scoop)
 
 ```powershell
-go build -buildvcs=false -o tomatone.exe ./cmd/tomatone
+scoop bucket add extras
+scoop install extras/mpv
+
+# Only when using YouTube
+scoop install yt-dlp
+```
+
+### macOS (Homebrew)
+
+```sh
+brew install mpv
+
+# Only when using YouTube
+brew install yt-dlp
+```
+
+### Debian / Ubuntu
+
+```sh
+sudo apt update
+sudo apt install mpv
+
+# Only when using YouTube
+sudo apt install yt-dlp
+```
+
+For other platforms and installation methods, see the [mpv installation guide](https://mpv.io/installation/) and the [yt-dlp installation guide](https://github.com/yt-dlp/yt-dlp/wiki/Installation).
+
+Verify that the installed commands can be found:
+
+```sh
+mpv --version
+yt-dlp --version # Only required for YouTube
+```
+
+## Build and run
+
+### Windows
+
+```powershell
+go build -o tomatone.exe ./cmd/tomatone
 .\tomatone.exe
 ```
 
-Inside a Git repository, the regular `go build -o tomatone.exe ./cmd/tomatone` command also works. Use `-buildvcs=false` only if Go reports a VCS metadata detection error in a directory that is not under Git.
+### macOS / Linux
+
+```sh
+go build -o tomatone ./cmd/tomatone
+./tomatone
+```
+
+If Go reports a VCS metadata detection error in a directory that is not under Git, add `-buildvcs=false` to the `go build` command.
+
+The command examples below use the Windows executable name. On macOS or Linux, replace `.\tomatone.exe` with `./tomatone` and Windows-style paths such as `.\config.json` with `./config.json`.
 
 Tomatone creates a configuration file on first launch. Use these commands to find and inspect it:
 
@@ -224,7 +275,7 @@ With `shuffle` enabled, Tomatone selects a random channel from the active URL li
 
 ## Controls
 
-At startup, Tomatone switches to its CUI dashboard and starts the timer and ambience player. On Windows, press each key directly without Enter. The original terminal display and input mode are restored when Tomatone exits.
+At startup, Tomatone switches to its CUI dashboard and starts the timer and ambience player. On Windows, macOS, and Linux, press each key directly without Enter. The original terminal display and input mode are restored when Tomatone exits.
 
 | Input | Action |
 |---|---|

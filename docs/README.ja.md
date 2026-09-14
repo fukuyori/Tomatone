@@ -2,7 +2,7 @@
 
 [English](README.md) | 日本語
 
-バージョン: **0.2.0**
+バージョン: **0.2.1**
 
 リポジトリ: [github.com/fukuyori/Tomatone](https://github.com/fukuyori/Tomatone)
 
@@ -16,14 +16,65 @@ Tomatone は、YouTubeやネットラジオのアンビエントサウンドを�
 
 `mpv` が `PATH` にあることを確認してください。YouTubeも利用する場合は `yt-dlp` も必要です。Tomatoneは動画を表示せず、音声だけを再生します。
 
-## ビルドと起動
+## 再生ツールのインストール
+
+### Windows（PowerShell、Scoopを使用）
 
 ```powershell
-go build -buildvcs=false -o tomatone.exe ./cmd/tomatone
+scoop bucket add extras
+scoop install extras/mpv
+
+# YouTubeを使う場合のみ
+scoop install yt-dlp
+```
+
+### macOS（Homebrewを使用）
+
+```sh
+brew install mpv
+
+# YouTubeを使う場合のみ
+brew install yt-dlp
+```
+
+### Debian / Ubuntu
+
+```sh
+sudo apt update
+sudo apt install mpv
+
+# YouTubeを使う場合のみ
+sudo apt install yt-dlp
+```
+
+その他の環境やインストール方法については、[mpvのインストール案内](https://mpv.io/installation/)と[yt-dlpのインストール案内](https://github.com/yt-dlp/yt-dlp/wiki/Installation)を参照してください。
+
+インストール後、コマンドが `PATH` から見つかることを確認します。
+
+```sh
+mpv --version
+yt-dlp --version # YouTubeを使う場合のみ必要
+```
+
+## ビルドと起動
+
+### Windows
+
+```powershell
+go build -o tomatone.exe ./cmd/tomatone
 .\tomatone.exe
 ```
 
-Gitリポジトリ内では通常の `go build -o tomatone.exe ./cmd/tomatone` でもビルドできます。まだGit管理されていないディレクトリでVCS情報の検出エラーが出る場合だけ `-buildvcs=false` を付けてください。
+### macOS / Linux
+
+```sh
+go build -o tomatone ./cmd/tomatone
+./tomatone
+```
+
+Git管理されていないディレクトリでVCS情報の検出エラーが出る場合だけ、`go build` に `-buildvcs=false` を追加してください。
+
+以下のコマンド例ではWindowsの実行ファイル名を使っています。macOS / Linuxでは`.\tomatone.exe`を`./tomatone`に、`.\config.json`のようなWindows形式のパスを`./config.json`に読み替えてください。
 
 初回起動時に設定ファイルが作成されます。場所は次のコマンドで確認できます。
 
@@ -224,7 +275,7 @@ JSONを直接編集せずに音源の登録、修正、削除、試聴を行う�
 
 ## 操作
 
-起動するとターミナルがCUI画面へ切り替わり、タイマーとアンビエンス再生が始まります。Windowsでは各キーを直接押して操作でき、Enterは不要です。終了すると元のターミナル画面と入力モードへ戻ります。
+起動するとターミナルがCUI画面へ切り替わり、タイマーとアンビエンス再生が始まります。Windows、macOS、Linuxでは各キーを直接押して操作でき、Enterは不要です。終了すると元のターミナル画面と入力モードへ戻ります。
 
 | 入力 | 動作 |
 |---|---|
